@@ -31,6 +31,9 @@ model DiaryEntry {
 
 model User {
   id           String       @id @default(uuid())
+  email        String
+  firstName     String
+  lastName     String
   createdAt    DateTime     @default(now())
   diaryEntries DiaryEntry[]
 }
