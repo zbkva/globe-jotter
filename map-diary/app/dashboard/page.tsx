@@ -17,7 +17,11 @@ const Dashboard: React.FC = () => {
       </Fab>
       <SearchBar />
       <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-stretch">
-        <PlaceCard title="Test Card 1" />
+        <PlaceCard
+          title={"Little Victories Coffee Roasters - Elgin"
+            .substring(0, 28)
+            .concat("...")}
+        />
         <PlaceCard title="Test Card 1" />
         <PlaceCard title="Test Card 2" />
         <PlaceCard title="Test Card 3" />

@@ -6,6 +6,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
+import { DiaryEntriesModule } from './diary-entries/diary-entries.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { PassportModule } from '@nestjs/passport';
     UsersModule,
     AuthModule,
     PassportModule.register({ session: true }),
+    DiaryEntriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
