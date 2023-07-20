@@ -1,5 +1,5 @@
 import React from "react";
-import useUser from "../../hooks/userHook";
+import useUser from "../hooks/userHook";
 
 const Callback: React.FC = () => {
   const { userResponse, isLoading, isError } = useUser();

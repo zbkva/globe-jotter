@@ -5,7 +5,8 @@ const SignUpButton: React.FC = () => {
   return (
     <Button
       variant="contained"
-      href="http://localhost:3001/api/auth/google/login"
+      //href="http://localhost:3001/api/auth/google/login"
+      href="/dashboard"
     >
       Sign up with Google
     </Button>
