@@ -26,7 +26,7 @@ const SearchBar: React.FC = () => {
             <MenuItem value={"Distance"}>Distance</MenuItem>
           </Select>
         </FormControl>
-        <FormControl className="min-w-[200px]" size="small">
+        <FormControl className="min-w-[180px]" size="small">
           <InputLabel id="select-category-label">Choose Category</InputLabel>
           <Select
             labelId="select-category-label"

@@ -11,7 +11,6 @@ export class DiaryEntriesService {
   }
 
   findAll(userId: string) {
-    console.log(userId);
     return this.prisma.diaryEntry.findMany({
       where: { userId: userId },
     });
