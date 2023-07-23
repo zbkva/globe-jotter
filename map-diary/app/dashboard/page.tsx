@@ -25,6 +25,12 @@ export default async function DashBoard() {
 
   const [user, diaryEntries] = await Promise.all([userData, userDiaryEntries]);
 
+  const getBgPictureClass = (diaryEntryPicture?: string): string => {
+    return `bg-[url(${
+      process.env.S3_BUCKET_URL + (diaryEntryPicture ?? "default.png")
+    })]`;
+  };
+
   return (
     <div className=" relative mx-2 my-2 sm:mx-8 lg:mx-20">
       <p className="text-2xl sm:text-4xl mb-8">Welcome, {user.firstName}</p>
@@ -40,7 +46,13 @@ export default async function DashBoard() {
         {!diaryEntries ? (
           <p>No entries</p>
         ) : (
-          diaryEntries.map((m) => <PlaceCard key={m.id} title={m.name} />)
+          diaryEntries.map((m) => (
+            <PlaceCard
+              key={m.id}
+              title={m.name}
+              bgPictureClass={getBgPictureClass(m.picture)}
+            />
+          ))
         )}
       </div>
     </div>

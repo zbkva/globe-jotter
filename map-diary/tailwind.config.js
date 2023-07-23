@@ -10,7 +10,7 @@ module.exports = {
   theme: {
     extend: {},
     backgroundImage: {
-      "little-victories": "url('../PUBLIC/littleVictories.jpeg')",
+      "default-place": `url('${process.env.S3_BUCKET_URL}littleVictories_defaultTODO.jpeg')`,
     },
     colors: {
       "orange-fawn": "#fdba74",

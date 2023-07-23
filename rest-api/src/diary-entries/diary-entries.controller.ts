@@ -31,6 +31,11 @@ export class DiaryEntriesController {
     return this.diaryEntriesService.findOne(id);
   }
 
+  @Get('picture')
+  findPicture() {
+    return this.diaryEntriesService.findPicture();
+  }
+
   @Patch(':id')
   update(
     @Param('id') id: string,

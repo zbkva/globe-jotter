@@ -2,10 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { CreateDiaryEntryDto } from './dto/create-diary-entry.dto';
 import { UpdateDiaryEntryDto } from './dto/update-diary-entry.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { S3Service } from 'src/s3/s3.service';
 
 @Injectable()
 export class DiaryEntriesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService, private s3: S3Service) {}
   create(createDiaryEntryDto: CreateDiaryEntryDto) {
     return 'This action adds a new diaryEntry';
   }
@@ -18,6 +19,10 @@ export class DiaryEntriesService {
 
   findOne(id: string) {
     return this.prisma.diaryEntry.findUnique({ where: { id } });
+  }
+
+  findPicture() {
+    return this.s3.getObject();
   }
 
   update(id: number, updateDiaryEntryDto: UpdateDiaryEntryDto) {
