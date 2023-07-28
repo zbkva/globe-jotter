@@ -11,22 +11,22 @@ datasource db {
 }
 
 model DiaryEntry {
-  id           String   @id @default(uuid())
-  user         User     @relation(fields: [userId], references: [id])
+  id           String    @id @default(uuid())
+  user         User      @relation(fields: [userId], references: [id])
   userId       String
-  name         String   @db.VarChar(255)
-  addressLine1 String   @db.VarChar(255)
-  addressLine2 String?
+  name         String    @db.VarChar(255)
+  addressLine1 String    @db.VarChar(255)
+  addressLine2 String?   @db.VarChar(255)
   city         String
   postalCode   String
   country      String
-  picture      String?
+  pictures     Picture[]
   rating       Int?
-  hasVisited   Boolean  @default(true)
-  note         String?  @db.Text
-  tags         String[] @default([])
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  hasVisited   Boolean   @default(true)
+  note         String?   @db.Text
+  tags         String[]  @default([])
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
 }
 
 model User {
@@ -36,4 +36,13 @@ model User {
   lastName     String
   createdAt    DateTime     @default(now())
   diaryEntries DiaryEntry[]
+}
+
+model Picture {
+  id           String     @id @default(uuid())
+  name         String     @db.VarChar(250)
+  extension    String     @db.VarChar(5)
+  createdAt    DateTime   @default(now())
+  diaryEntry   DiaryEntry @relation(fields: [diaryEntryId], references: [id])
+  diaryEntryId String
 }

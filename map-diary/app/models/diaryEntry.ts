@@ -7,9 +7,9 @@ export interface DiaryEntry {
   city: string;
   postalCode: string;
   country: string;
-  picture: string;
+  pictureIds: Array<string>;
   rating?: string;
   hasVisited: boolean;
-  note: string;
+  note?: string;
   createdAt: Date;
 }

@@ -6,13 +6,17 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
+  Logger,
 } from '@nestjs/common';
 import { DiaryEntriesService } from './diary-entries.service';
 import { CreateDiaryEntryDto } from './dto/create-diary-entry.dto';
 import { UpdateDiaryEntryDto } from './dto/update-diary-entry.dto';
+import { SearchDiaryEntry } from './dto/search-diary-entry.dto';
 
 @Controller('diaryentries')
 export class DiaryEntriesController {
+  private readonly logger = new Logger(DiaryEntriesController.name);
   constructor(private readonly diaryEntriesService: DiaryEntriesService) {}
 
   @Post()
@@ -21,9 +25,8 @@ export class DiaryEntriesController {
   }
 
   @Get('users/:userId')
-  findAll(@Param('userId') userId: string) {
-    console.log(userId);
-    return this.diaryEntriesService.findAll(userId);
+  findAll(@Param('userId') userId: string, @Query() search: SearchDiaryEntry) {
+    return this.diaryEntriesService.findMany(userId, search);
   }
 
   @Get(':id')

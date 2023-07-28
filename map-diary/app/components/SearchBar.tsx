@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   FormControl,
@@ -6,10 +7,23 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  SelectChangeEvent,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { DiaryEntry } from "../models/diaryEntry";
+import { SortOrderEnum, SortValueEnum } from "../data";
 
-const SearchBar: React.FC = () => {
+const sortMap = new Map<SortValueEnum, SortOrderEnum>([
+  [SortValueEnum.NAME, SortOrderEnum.ASC],
+  [SortValueEnum.CREATEDAT, SortOrderEnum.DESC],
+  [SortValueEnum.RATING, SortOrderEnum.DESC],
+]);
+
+export default function SearchBar() {
+  const handleChange = (event: SelectChangeEvent) => {
+    const sortValue = event.target.value as SortValueEnum;
+    //getDiaryEntries(sortValue, sortMap.get(sortValue));
+  };
   return (
     <div className="flex flex-col gap-2 justify-between md:flex-row-reverse mb-4">
       <div className="flex gap-3">
@@ -20,10 +34,14 @@ const SearchBar: React.FC = () => {
             id="select-sort"
             label="Sort"
             className="rounded-full border border-blue-columbia"
+            onChange={handleChange}
           >
-            <MenuItem value={"Alphabetically"}>Alphabetically</MenuItem>
-            <MenuItem value={"Date Added"}>Date Added</MenuItem>
-            <MenuItem value={"Distance"}>Distance</MenuItem>
+            <MenuItem value={SortValueEnum.NAME}>Alphabetically</MenuItem>
+            <MenuItem value={SortValueEnum.CREATEDAT}>Date Added</MenuItem>
+            <MenuItem value={SortValueEnum.RATING}>Rating</MenuItem>
+            <MenuItem disabled value={"distance"}>
+              Distance
+            </MenuItem>
           </Select>
         </FormControl>
         <FormControl className="min-w-[180px]" size="small">
@@ -33,6 +51,7 @@ const SearchBar: React.FC = () => {
             id="select-category"
             label="Choose Category"
             className="rounded-full border border-blue-columbia"
+            disabled
           >
             <MenuItem value={"Outdoor"}>Outdoor</MenuItem>
             <MenuItem value={"Coffee"}>Coffee</MenuItem>
@@ -53,6 +72,4 @@ const SearchBar: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default SearchBar;
+}

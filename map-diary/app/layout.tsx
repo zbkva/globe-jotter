@@ -1,3 +1,4 @@
+import { MapDiaryContextProvider } from "./context/mapDiary.context";
 import "./globals.css";
 
 export default function RootLayout({
@@ -7,7 +8,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <MapDiaryContextProvider>{children}</MapDiaryContextProvider>
+      </body>
     </html>
   );
 }

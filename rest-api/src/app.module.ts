@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
 import { DiaryEntriesModule } from './diary-entries/diary-entries.module';
+import { PicturesModule } from './pictures/pictures.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { DiaryEntriesModule } from './diary-entries/diary-entries.module';
     AuthModule,
     PassportModule.register({ session: true }),
     DiaryEntriesModule,
+    PicturesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

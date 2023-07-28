@@ -4,7 +4,6 @@ import useUser from "../hooks/userHook";
 const Callback: React.FC = () => {
   const { userResponse, isLoading, isError } = useUser();
 
-  console.log(userResponse);
   return (
     <>
       {isLoading && <p>Loading...</p>}
