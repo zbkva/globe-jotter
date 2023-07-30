@@ -10,8 +10,8 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { DiaryEntry } from "../models/diaryEntry";
 import { SortOrderEnum, SortValueEnum } from "../data";
+import { useRouter } from "next/navigation";
 
 const sortMap = new Map<SortValueEnum, SortOrderEnum>([
   [SortValueEnum.NAME, SortOrderEnum.ASC],
@@ -20,9 +20,12 @@ const sortMap = new Map<SortValueEnum, SortOrderEnum>([
 ]);
 
 export default function SearchBar() {
-  const handleChange = (event: SelectChangeEvent) => {
+  const router = useRouter();
+  const handleChange = async (event: SelectChangeEvent) => {
     const sortValue = event.target.value as SortValueEnum;
-    //getDiaryEntries(sortValue, sortMap.get(sortValue));
+    router.push(
+      `/dashboard?sortValue=${sortValue}&sortOrder=${sortMap.get(sortValue)}`
+    );
   };
   return (
     <div className="flex flex-col gap-2 justify-between md:flex-row-reverse mb-4">

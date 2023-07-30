@@ -1,3 +1,5 @@
+import { Picture } from "./picture";
+
 export interface DiaryEntry {
   id: string;
   userId: string;
@@ -7,8 +9,8 @@ export interface DiaryEntry {
   city: string;
   postalCode: string;
   country: string;
-  pictureIds: Array<string>;
-  rating?: string;
+  pictures: Array<Picture>;
+  rating?: number;
   hasVisited: boolean;
   note?: string;
   createdAt: Date;

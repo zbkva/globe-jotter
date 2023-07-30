@@ -13,12 +13,15 @@ export class DiaryEntriesService {
     return 'This action adds a new diaryEntry';
   }
 
-  findMany(userId: string, search: SearchDiaryEntry) {
+  async findMany(userId: string, search: SearchDiaryEntry) {
     this.logger.log(search.sortValue);
     this.logger.log(search.sortOrder);
 
     const orderBy = { [search.sortValue]: search.sortOrder };
     return this.prisma.diaryEntry.findMany({
+      include: {
+        pictures: true,
+      },
       orderBy,
       where: { userId: userId },
     });

@@ -1,6 +1,5 @@
 import React from "react";
 import { DiaryEntry } from "../models/diaryEntry";
-import { Picture } from "../models/picture";
 
 const getRandomEmoji = () => {
   const emojis = [
@@ -61,13 +60,15 @@ const getRandomEmoji = () => {
   return emojis[~~(Math.random() * emojis.length)];
 };
 
-export default async function PlaceCard({
+export default async function DiaryEntryCard({
   diaryEntry,
 }: {
   diaryEntry: DiaryEntry;
 }) {
   const bgUrl =
-    process.env.S3_BUCKET_URL + (diaryEntry.pictureIds[0] ?? "default.png");
+    process.env.S3_BUCKET_URL +
+    "/" +
+    (diaryEntry.pictures[0]?.id ?? "default.png");
 
   return (
     <div className="p-0 bg-blue-columbia rounded-xl shadow-lg">

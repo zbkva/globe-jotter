@@ -1,14 +1,23 @@
 import React from "react";
-import PlaceCard from "../components/PlaceCard";
 import { Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DiaryEntriesList from "./diaryEntriesList";
-import SearchBar from "../components/SearchBar";
+import Greeting from "./greeting";
+import { SortValueEnum, SortOrderEnum, getDiaryEntries } from "../data";
+import SearchBar from "./searchBar";
 
-export default async function DashBoard() {
+export default async function DashBoard({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const sortValue = searchParams.sortValue as SortValueEnum;
+  const sortOrder = searchParams.sortOrder as SortOrderEnum;
+
+  const diaryEntries = await getDiaryEntries(sortValue, sortOrder);
   return (
-    <div className=" relative mx-2 my-2 sm:mx-8 lg:mx-20">
-      <p className="text-2xl sm:text-4xl mb-8">Welcome, Fernando</p>
+    <div className="relative mx-2 my-2 sm:mx-8 lg:mx-20">
+      <Greeting />
       <Fab
         aria-label="add"
         size="medium"
@@ -17,7 +26,7 @@ export default async function DashBoard() {
         <AddIcon />
       </Fab>
       <SearchBar />
-      <DiaryEntriesList />
+      <DiaryEntriesList diaryEntries={diaryEntries} />
     </div>
   );
 }
