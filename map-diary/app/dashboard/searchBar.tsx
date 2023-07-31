@@ -25,43 +25,43 @@ export default function SearchBar() {
   const searchParams = useSearchParams()!;
 
   const [searchValue, setSearchValue] = React.useState(
-    searchParams.get("search")
+    searchParams.get("search") ?? undefined
   );
 
   const handleOnSortChange = (event: SelectChangeEvent) => {
+    const sortValue = event.target.value as SortValueEnum;
+    updateSearchParameters({
+      sort: sortValue,
+      sortOrder: sortMap.get(sortValue)!,
+    });
+  };
+
+  const handleOnSearch = (
+    event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>,
+    searchValue?: string
+  ) => {
+    if (event.key === "Enter") {
+      updateSearchParameters({ search: searchValue });
+    }
+  };
+
+  const updateSearchParameters = (newParams: {
+    [key: string]: string | undefined;
+  }) => {
     const currentParams = new URLSearchParams(
       Array.from(searchParams.entries())
     );
 
-    const sortValue = event.target.value as SortValueEnum;
-
-    if (!sortValue) {
-      currentParams.delete("sort");
-      currentParams.delete("sortOrder");
-    } else {
-      currentParams.set("sort", sortValue);
-      currentParams.set("sortOrder", sortMap.get(sortValue)!);
+    for (const [key, value] of Object.entries(newParams)) {
+      if (!value) {
+        currentParams.delete(key);
+      } else {
+        currentParams.set(key, value);
+      }
     }
 
     const params = currentParams.toString();
     router.replace(`${pathname}?${params}`);
-  };
-
-  const handleOnSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      const currentParams = new URLSearchParams(
-        Array.from(searchParams.entries())
-      );
-
-      if (!searchValue) {
-        currentParams.delete("search");
-      } else {
-        currentParams.set("search", searchValue);
-      }
-
-      const params = currentParams.toString();
-      router.replace(`${pathname}?${params}`);
-    }
   };
 
   return (
@@ -113,7 +113,7 @@ export default function SearchBar() {
               <SearchIcon />
             </InputAdornment>
           }
-          onKeyDown={handleOnSearch}
+          onKeyDown={(e) => handleOnSearch(e, searchValue)}
         />
       </div>
     </div>
