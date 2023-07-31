@@ -1,5 +1,4 @@
 import React from "react";
-import { getDiaryEntries } from "../data";
 import DiaryEntryCard from "./diaryEntryCard";
 import { DiaryEntry } from "../models/diaryEntry";
 

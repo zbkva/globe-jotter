@@ -25,8 +25,11 @@ export class DiaryEntriesController {
   }
 
   @Get('users/:userId')
-  findAll(@Param('userId') userId: string, @Query() search: SearchDiaryEntry) {
-    return this.diaryEntriesService.findMany(userId, search);
+  findAll(
+    @Param('userId') userId: string,
+    @Query() searchParams: SearchDiaryEntry,
+  ) {
+    return this.diaryEntriesService.findMany(userId, searchParams);
   }
 
   @Get(':id')

@@ -11,10 +11,11 @@ export default async function DashBoard({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const sortValue = searchParams.sortValue as SortValueEnum;
+  const sortValue = searchParams.sort as SortValueEnum;
   const sortOrder = searchParams.sortOrder as SortOrderEnum;
+  const searchValue = searchParams.search as string;
 
-  const diaryEntries = await getDiaryEntries(sortValue, sortOrder);
+  const diaryEntries = await getDiaryEntries(sortValue, sortOrder, searchValue);
   return (
     <div className="relative mx-2 my-2 sm:mx-8 lg:mx-20">
       <Greeting />

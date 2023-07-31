@@ -13,17 +13,22 @@ export class DiaryEntriesService {
     return 'This action adds a new diaryEntry';
   }
 
-  async findMany(userId: string, search: SearchDiaryEntry) {
-    this.logger.log(search.sortValue);
-    this.logger.log(search.sortOrder);
+  async findMany(userId: string, searchParams: SearchDiaryEntry) {
+    this.logger.log(searchParams.search);
 
-    const orderBy = { [search.sortValue]: search.sortOrder };
+    const orderBy = { [searchParams.sortValue]: searchParams.sortOrder };
     return this.prisma.diaryEntry.findMany({
       include: {
         pictures: true,
       },
       orderBy,
-      where: { userId: userId },
+      where: {
+        userId: userId,
+        name: {
+          contains: searchParams.search,
+          mode: 'insensitive',
+        },
+      },
     });
   }
 

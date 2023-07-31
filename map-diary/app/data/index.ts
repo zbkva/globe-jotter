@@ -16,12 +16,13 @@ const API_BASE_URL = process.env.API_BASE_URL;
 
 export const getDiaryEntries = async (
   sortValue?: SortValueEnum,
-  sortOrder?: SortOrderEnum
+  sortOrder?: SortOrderEnum,
+  searchValue?: string
 ): Promise<Array<DiaryEntry>> => {
   const res = await fetch(
     `${API_BASE_URL}/diaryentries/users/54e1b8fe-24e2-4423-a8df-20c46a7ae120?sortValue=${
       sortValue ?? ""
-    }&sortOrder=${sortOrder ?? ""}`
+    }&sortOrder=${sortOrder ?? ""}&search=${searchValue ?? ""}`
   );
 
   return res.json();
