@@ -7,7 +7,6 @@ import {
   Param,
   Delete,
   Query,
-  Logger,
 } from '@nestjs/common';
 import { DiaryEntriesService } from './diary-entries.service';
 import { CreateDiaryEntryDto } from './dto/create-diary-entry.dto';
@@ -16,7 +15,6 @@ import { SearchDiaryEntry } from './dto/search-diary-entry.dto';
 
 @Controller('diaryentries')
 export class DiaryEntriesController {
-  private readonly logger = new Logger(DiaryEntriesController.name);
   constructor(private readonly diaryEntriesService: DiaryEntriesService) {}
 
   @Post()

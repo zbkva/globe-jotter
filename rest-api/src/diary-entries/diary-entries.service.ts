@@ -8,14 +8,11 @@ import { SearchDiaryEntry } from './dto/search-diary-entry.dto';
 @Injectable()
 export class DiaryEntriesService {
   constructor(private prisma: PrismaService, private s3: S3Service) {}
-  private readonly logger = new Logger(DiaryEntriesService.name);
   create(createDiaryEntryDto: CreateDiaryEntryDto) {
     return 'This action adds a new diaryEntry';
   }
 
   async findMany(userId: string, searchParams: SearchDiaryEntry) {
-    this.logger.log(searchParams.search);
-
     const orderBy = { [searchParams.sortValue]: searchParams.sortOrder };
     return this.prisma.diaryEntry.findMany({
       include: {
