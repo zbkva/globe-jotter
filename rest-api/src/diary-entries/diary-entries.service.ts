@@ -1,8 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { CreateDiaryEntryDto } from './dto/create-diary-entry.dto';
 import { UpdateDiaryEntryDto } from './dto/update-diary-entry.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { S3Service } from 'src/s3/s3.service';
+import { PrismaService } from '../prisma/prisma.service';
+import { S3Service } from '../s3/s3.service';
 import { SearchDiaryEntry } from './dto/search-diary-entry.dto';
 
 @Injectable()
