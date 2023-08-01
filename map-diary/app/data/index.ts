@@ -20,7 +20,7 @@ export const getDiaryEntries = async (
   searchValue?: string
 ): Promise<Array<DiaryEntry>> => {
   const res = await fetch(
-    `${API_BASE_URL}/diaryentries/users/54e1b8fe-24e2-4423-a8df-20c46a7ae120?sortValue=${
+    `${API_BASE_URL}/diaryentries/users/6e1ffb3f-946a-4ce3-aefe-334e363f168b?sortValue=${
       sortValue ?? ""
     }&sortOrder=${sortOrder ?? ""}&search=${searchValue ?? ""}`
   );
@@ -30,7 +30,7 @@ export const getDiaryEntries = async (
 
 export const getUser = async (): Promise<User> => {
   const res = await fetch(
-    `${API_BASE_URL}/users/54e1b8fe-24e2-4423-a8df-20c46a7ae120`
+    `${API_BASE_URL}/users/6e1ffb3f-946a-4ce3-aefe-334e363f168b`
   );
   return res.json();
 };
